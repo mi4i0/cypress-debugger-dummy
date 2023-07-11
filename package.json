@@ -1,0 +1,37 @@
+{
+  "name": "autotests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cypress:e2e:debug": "cypress open --e2e --browser=chrome",
+    "staging:e2e:smoke": "NODE_DEBUG=cypress-har-generator* DEBUG=cypress-debugger* cypress run --browser=chrome"
+  },
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": "^18.16"
+  },
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "18.0.1",
+    "@cypress/browserify-preprocessor": "3.0.2",
+    "@types/node": "20.3.1",
+    "cypress": "12.17.0",
+    "cypress-cloud": "1.9.1",
+    "cypress-debugger": "1.0.5",
+    "cypress-fill-command": "1.0.2",
+    "cypress-plugin-init": "0.0.8",
+    "cypress-real-events": "1.8.1",
+    "cypress-wait-until": "2.0.0",
+    "luxon": "3.3.0",
+    "node-fetch": "2.6.11",
+    "node-xlsx": "0.23.0",
+    "papaparse": "5.4.1",
+    "prettier": "2.8.8",
+    "ts-node": "10.9.1",
+    "typescript": "4.8.4"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "./cypress/support/step_definitions/**/*.ts"
+  }
+}
