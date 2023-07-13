@@ -14,18 +14,20 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands';
+import { debuggerSupport } from "cypress-debugger";
 
+import "./commands";
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+debuggerSupport();
 
 // eslint-disable-next-line no-undef
-Cypress.on('uncaught:exception', () => {
+Cypress.on("uncaught:exception", () => {
   // returning false here prevents Cypress from
   // failing the test
   return false;
 });
 
-Cypress.on('window:before:unload', (event) => {
+Cypress.on("window:before:unload", (event) => {
   event.stopImmediatePropagation();
 });
