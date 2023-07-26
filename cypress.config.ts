@@ -10,7 +10,7 @@ async function setupNodeEvents(
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions
 ): Promise<Cypress.PluginConfigOptions> {
-  const { parse: parseCSV } = require("papaparse");
+  const {parse: parseCSV} = require("papaparse");
   const mapRelativeToHomeToFullPath = (relative) =>
     `${process.env.HOME}/${relative}`;
   const FormData = require("form-data");
@@ -26,7 +26,7 @@ async function setupNodeEvents(
 
   // Have to add this task because Cypress.request() can not formData request
   on("task", {
-    httpRequest({ url, requestOptions, isFormData, fileKeyName }) {
+    httpRequest({url, requestOptions, isFormData, fileKeyName}) {
       const formData = new FormData();
       let currentResponse;
 
@@ -80,14 +80,14 @@ async function setupNodeEvents(
   });
 
   on("task", {
-    readCSV({ filePath, isRelativeToHome }) {
+    readCSV({filePath, isRelativeToHome}) {
       const absFilePath = isRelativeToHome
         ? mapRelativeToHomeToFullPath(filePath)
         : `./${filePath}`;
       return new Promise((resolve, reject) => {
         try {
           resolve(
-            parseCSV(fs.readFileSync(absFilePath).toString(), { header: true })
+            parseCSV(fs.readFileSync(absFilePath).toString(), {header: true})
           );
         } catch (e) {
           reject(e);
@@ -97,7 +97,7 @@ async function setupNodeEvents(
   });
 
   on("task", {
-    parseXlsx({ filePath }) {
+    parseXlsx({filePath}) {
       return new Promise((resolve, reject) => {
         try {
           const jsonData = xlsx.parse(fs.readFileSync(`./${filePath}`));
@@ -116,7 +116,7 @@ async function setupNodeEvents(
           if (err) {
             resolve(err);
           } else {
-            fs.rmdirSync(`./${dir}`, { recursive: true });
+            fs.rmdirSync(`./${dir}`, {recursive: true});
             resolve(true);
           }
         });
@@ -255,7 +255,6 @@ export default defineConfig({
     retries: {
       runMode: 1,
     },
-    // setupNodeEvents: (on, config) => initPlugins(on, [setupNodeEvents], config),
     setupNodeEvents,
   },
 });
